@@ -216,7 +216,7 @@ function PaymentForm({ selectedCard }) {
 						<label
 							className='payment-label'
 							htmlFor='terms-conditions'>
-							I agree to the terms & conditions
+							I agree to the <a href="https://www.google.com/" >terms & conditions</a>
 						</label>
 					</div>
 
