@@ -6,14 +6,12 @@ function PaymentForm({ selectedCard }) {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(formRef.current);
-
 		const formData = new FormData(formRef.current);
-
-		for (let [key, value] of formData.entries()) {
-			console.log(`${key}: ${value}`);
+		for (const pair of formData) {
+			console.log(`${pair[0]}: ${pair[1]}`);
 		}
 	};
+
 	return (
 		<div className='payment-form'>
 			<form
@@ -36,6 +34,7 @@ function PaymentForm({ selectedCard }) {
 						className='payment-input'
 						type='text'
 						id='cardholder-name'
+						name='cardholder'
 						required
 					/>
 				</div>
@@ -53,6 +52,7 @@ function PaymentForm({ selectedCard }) {
 						required
 						maxLength='16'
 						pattern='\d{16}'
+						name='cardnumber'
 					/>
 				</div>
 
@@ -70,6 +70,7 @@ function PaymentForm({ selectedCard }) {
 						placeholder='MMYY'
 						maxLength='4'
 						pattern='\d{4}'
+						name='expirationdate'
 					/>
 				</div>
 
@@ -86,6 +87,7 @@ function PaymentForm({ selectedCard }) {
 						required
 						maxLength='3'
 						pattern='\d{3}'
+						name='password'
 					/>
 				</div>
 				<div>
@@ -102,6 +104,7 @@ function PaymentForm({ selectedCard }) {
 							type='text'
 							id='street-address'
 							required
+							name='streetaddress'
 						/>
 					</div>
 
@@ -115,6 +118,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='text'
 							id='apt-number'
+							name='aptnumber'
 						/>
 					</div>
 
@@ -128,6 +132,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='text'
 							id='city'
+							name='city'
 							required
 						/>
 					</div>
@@ -174,6 +179,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='text'
 							id='zip'
+							name='zip'
 							required
 						/>
 					</div>
@@ -188,6 +194,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='tel'
 							id='phone-number'
+							name='phonenumber'
 							required
 						/>
 					</div>
@@ -202,6 +209,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='email'
 							id='email'
+							name='email'
 							required
 						/>
 					</div>
@@ -211,6 +219,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-checkbox'
 							type='checkbox'
 							id='terms-conditions'
+							name='termsandcondition'
 							required
 						/>
 						<label
