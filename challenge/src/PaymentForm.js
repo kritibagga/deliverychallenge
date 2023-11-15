@@ -12,14 +12,12 @@ function PaymentForm({ selectedCard }) {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(formRef.current);
-
 		const formData = new FormData(formRef.current);
-
-		for (let [key, value] of formData.entries()) {
-			console.log(`${key}: ${value}`);
+		for (const pair of formData) {
+			console.log(`${pair[0]}: ${pair[1]}`);
 		}
 	};
+
 	return (
 		<div className='payment-form'>
 			<form
@@ -42,6 +40,7 @@ function PaymentForm({ selectedCard }) {
 						className='payment-input'
 						type='text'
 						id='cardholder-name'
+						name='cardholder'
 						required
 					/>
 				</div>
@@ -59,6 +58,7 @@ function PaymentForm({ selectedCard }) {
 						required
 						maxLength='16'
 						pattern='\d{16}'
+						name='cardnumber'
 					/>
 				</div>
 
@@ -68,6 +68,8 @@ function PaymentForm({ selectedCard }) {
 						htmlFor='expiration-date'>
 						Expiration date
 					</label>
+
+
 					<div className='new-box'>
 						<input
 							className='payment-input'
@@ -76,6 +78,7 @@ function PaymentForm({ selectedCard }) {
 							required
 							placeholder='MMYY'
 							maxLength='4'
+              name='expirationdate'
 							pattern='\d{4}'
 						/>
 					</div>
@@ -87,6 +90,7 @@ function PaymentForm({ selectedCard }) {
 						htmlFor='cvv'>
 						CVV
 					</label>
+
 					<div className='new-box'>
 						<input
 							className='payment-input'
@@ -94,9 +98,11 @@ function PaymentForm({ selectedCard }) {
 							id='cvv'
 							required
 							maxLength='3'
+              name='password'
 							pattern='\d{3}'
 						/>
 					</div>
+
 				</div>
 				<div>
 					<h2>Billing address</h2>
@@ -112,6 +118,7 @@ function PaymentForm({ selectedCard }) {
 							type='text'
 							id='street-address'
 							required
+							name='streetaddress'
 						/>
 					</div>
 
@@ -125,6 +132,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='text'
 							id='apt-number'
+							name='aptnumber'
 						/>
 					</div>
 
@@ -138,6 +146,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='text'
 							id='city'
+							name='city'
 							required
 						/>
 					</div>
@@ -186,6 +195,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='text'
 							id='zip'
+							name='zip'
 							required
 						/>
 					</div>
@@ -200,6 +210,7 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='tel'
 							id='phone-number'
+							name='phonenumber'
 							required
 						/>
 					</div>
@@ -214,14 +225,18 @@ function PaymentForm({ selectedCard }) {
 							className='payment-input'
 							type='email'
 							id='email'
+							name='email'
 							required
 						/>
 					</div>
+
 					<div>
 						<label className='payment-terms-label'>
 							<input
 								className='payment-checkbox'
 								type='checkbox'
+                id='terms-conditions'
+							  name='termsandcondition'
 								required
 							/>
 							<label
@@ -231,6 +246,7 @@ function PaymentForm({ selectedCard }) {
 								<a href='https://www.google.com/'>terms & conditions</a>
 							</label>
 							<span className='checkmark'></span>
+
 						</label>
 
 						<button
