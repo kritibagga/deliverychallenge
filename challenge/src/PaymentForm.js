@@ -1,8 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import OrderSummary from "./OrderSummary";
 
 function PaymentForm({ selectedCard }) {
 	const formRef = useRef(null);
+	const [disabled, setDisabled] = useState(true);
+	const handleChange = (event) => {
+		if (event.target.value) {
+			setDisabled(false);
+		}
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -62,16 +68,20 @@ function PaymentForm({ selectedCard }) {
 						htmlFor='expiration-date'>
 						Expiration date
 					</label>
-					<input
-						className='payment-input'
-						type='text'
-						id='expiration-date'
-						required
-						placeholder='MMYY'
-						maxLength='4'
-						pattern='\d{4}'
-						name='expirationdate'
-					/>
+
+
+					<div className='new-box'>
+						<input
+							className='payment-input'
+							type='text'
+							id='expiration-date'
+							required
+							placeholder='MMYY'
+							maxLength='4'
+              name='expirationdate'
+							pattern='\d{4}'
+						/>
+					</div>
 				</div>
 
 				<div className='payment-group'>
@@ -80,15 +90,19 @@ function PaymentForm({ selectedCard }) {
 						htmlFor='cvv'>
 						CVV
 					</label>
-					<input
-						className='payment-input'
-						type='password'
-						id='cvv'
-						required
-						maxLength='3'
-						pattern='\d{3}'
-						name='password'
-					/>
+
+					<div className='new-box'>
+						<input
+							className='payment-input'
+							type='password'
+							id='cvv'
+							required
+							maxLength='3'
+              name='password'
+							pattern='\d{3}'
+						/>
+					</div>
+
 				</div>
 				<div>
 					<h2>Billing address</h2>
@@ -146,8 +160,9 @@ function PaymentForm({ selectedCard }) {
 						<select
 							className='payment-select'
 							id='country'
-							required>
-							<option value=''>Select a country</option>
+							required
+							onChange={handleChange}>
+							<option value=''>Select a country </option>
 							<option value='US'>United States</option>
 							<option value='CA'>Canada</option>
 						</select>
@@ -162,6 +177,7 @@ function PaymentForm({ selectedCard }) {
 						<select
 							className='payment-select'
 							id='state'
+							disabled={disabled}
 							required>
 							<option value=''>Select a state or province</option>
 							<option value='NY'>New York</option>
@@ -214,28 +230,34 @@ function PaymentForm({ selectedCard }) {
 						/>
 					</div>
 
-					<div className='payment-terms'>
-						<input
-							className='payment-checkbox'
-							type='checkbox'
-							id='terms-conditions'
-							name='termsandcondition'
-							required
-						/>
-						<label
-							className='payment-label'
-							htmlFor='terms-conditions'>
-							I agree to the terms & conditions
-						</label>
-					</div>
+					<div>
+						<label className='payment-terms-label'>
+							<input
+								className='payment-checkbox'
+								type='checkbox'
+                id='terms-conditions'
+							  name='termsandcondition'
+								required
+							/>
+							<label
+								className='payment-label'
+								htmlFor='terms-conditions'>
+								I agree to the{" "}
+								<a href='https://www.google.com/'>terms & conditions</a>
+							</label>
+							<span className='checkmark'></span>
 
-					<button
-						className='payment-btn'
-						type='submit'>
-						Buy Miles
-					</button>
+						</label>
+
+						<button
+							className='payment-btn'
+							type='submit'>
+							Buy Miles
+						</button>
+					</div>
 				</div>
 			</form>
+
 			<div className='order-summary-wrap'>
 				<OrderSummary data={selectedCard} />
 			</div>
