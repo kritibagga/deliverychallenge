@@ -225,6 +225,14 @@ function PaymentForm({ selectedCard }) {
 							type='checkbox'
 							required
 						/>
+
+						<label
+							className='payment-label'
+							htmlFor='terms-conditions'>
+							I agree to the <a href="https://www.google.com/" >terms & conditions</a>
+						</label>
+					</div>
+
 						<span className='checkmark'></span>
 					</label>
 

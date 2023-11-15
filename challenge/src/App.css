@@ -66,6 +66,10 @@ body {
 	margin-bottom: 8px;
 }
 
+.payment-label a {
+	color: black;
+}
+
 .payment-input {
 	width: 100%;
 	padding: 10px;
@@ -73,6 +77,7 @@ body {
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 }
+
 .new-box {
 	max-width: 50%;
 }
@@ -174,6 +179,7 @@ body {
 .order-summary {
 	width: 300px;
 }
+
 .order-wrap {
 	background-color: #f3f3f3;
 	padding: 1rem;
