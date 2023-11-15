@@ -1,8 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef,useState } from "react";
 import OrderSummary from "./OrderSummary";
 
 function PaymentForm({ selectedCard }) {
 	const formRef = useRef(null);
+	const [disabled, setDisabled]=useState(true);
+	const handleChange=(event)=>{
+		if(event.target.value){
+			setDisabled(false)
+
+		}
+
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -62,6 +70,7 @@ function PaymentForm({ selectedCard }) {
 						htmlFor='expiration-date'>
 						Expiration date
 					</label>
+					<div className='new-box'>
 					<input
 						className='payment-input'
 						type='text'
@@ -71,6 +80,7 @@ function PaymentForm({ selectedCard }) {
 						maxLength='4'
 						pattern='\d{4}'
 					/>
+					</div>
 				</div>
 
 				<div className='payment-group'>
@@ -79,6 +89,7 @@ function PaymentForm({ selectedCard }) {
 						htmlFor='cvv'>
 						CVV
 					</label>
+					<div className='new-box'>
 					<input
 						className='payment-input'
 						type='password'
@@ -87,6 +98,7 @@ function PaymentForm({ selectedCard }) {
 						maxLength='3'
 						pattern='\d{3}'
 					/>
+					</div>
 				</div>
 				<div>
 					<h2>Billing address</h2>
@@ -141,8 +153,8 @@ function PaymentForm({ selectedCard }) {
 						<select
 							className='payment-select'
 							id='country'
-							required>
-							<option value=''>Select a country</option>
+							required onChange={handleChange}>
+							<option value=''>Select a country </option>
 							<option value='US'>United States</option>
 							<option value='CA'>Canada</option>
 						</select>
@@ -156,7 +168,7 @@ function PaymentForm({ selectedCard }) {
 						</label>
 						<select
 							className='payment-select'
-							id='state'
+							id='state'disabled={disabled}
 							required>
 							<option value=''>Select a state or province</option>
 							<option value='NY'>New York</option>
@@ -206,19 +218,15 @@ function PaymentForm({ selectedCard }) {
 						/>
 					</div>
 
-					<div className='payment-terms'>
+					<label className='payment-terms-label'>
+						I agree to the terms & conditions
 						<input
 							className='payment-checkbox'
 							type='checkbox'
-							id='terms-conditions'
 							required
 						/>
-						<label
-							className='payment-label'
-							htmlFor='terms-conditions'>
-							I agree to the terms & conditions
-						</label>
-					</div>
+						<span className='checkmark'></span>
+					</label>
 
 					<button
 						className='payment-btn'
