@@ -1,14 +1,10 @@
 import React, { useRef, useState } from "react";
 import OrderSummary from "./OrderSummary";
+import CountryStateDropdown from "./CountryStateDropdown";
 
 function PaymentForm({ selectedCard }) {
 	const formRef = useRef(null);
-	const [disabled, setDisabled] = useState(true);
-	const handleChange = (event) => {
-		if (event.target.value) {
-			setDisabled(false);
-		}
-	};
+
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -16,6 +12,13 @@ function PaymentForm({ selectedCard }) {
 		for (const pair of formData) {
 			console.log(`${pair[0]}: ${pair[1]}`);
 		}
+	};
+	const handleCountryChange = (selectedCountry) => {
+		console.log("Selected country:", selectedCountry);
+	};
+
+	const handleStateChange = (selectedState) => {
+		console.log("Selected state:", selectedState);
 	};
 
 	return (
@@ -150,8 +153,12 @@ function PaymentForm({ selectedCard }) {
 							required
 						/>
 					</div>
+					<CountryStateDropdown
+						onCountryChange={handleCountryChange}
+						onStateChange={handleStateChange}
+					/>
 
-					<div className='payment-group'>
+					{/* <div className='payment-group'>
 						<label
 							className='payment-label'
 							htmlFor='country'>
@@ -183,7 +190,7 @@ function PaymentForm({ selectedCard }) {
 							<option value='NY'>New York</option>
 							<option value='CA'>California</option>
 						</select>
-					</div>
+					</div> */}
 
 					<div className='payment-group'>
 						<label
