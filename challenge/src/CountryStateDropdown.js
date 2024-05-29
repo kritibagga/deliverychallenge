@@ -12,23 +12,23 @@ const states = {
 		{ label: "Select a state", value: "" },
 		{ label: "New York", value: "NY" },
 		{ label: "California", value: "CA" },
-
 	],
 	CA: [
 		{ label: "Select a province", value: "" },
 		{ label: "Ontario", value: "ON" },
 		{ label: "Quebec", value: "QC" },
-
 	],
-
 };
 
 const CountryStateDropdown = ({ onCountryChange, onStateChange }) => {
 	const [selectedCountry, setSelectedCountry] = useState("");
 	const [selectedState, setSelectedState] = useState("");
 
+	const [disabled, setDisabled] = useState(true);
+
 	const handleCountryChange = (event) => {
 		const countryValue = event.target.value;
+		setDisabled(false);
 		setSelectedCountry(countryValue);
 		setSelectedState("");
 		onCountryChange(countryValue);
@@ -84,6 +84,8 @@ const CountryStateDropdown = ({ onCountryChange, onStateChange }) => {
 					className='payment-select'
 					id='state'
 					required
+					placeholder='Select a State'
+					disabled={disabled}
 					onChange={handleStateChange}
 					value={selectedState}>
 					{stateOptions}
