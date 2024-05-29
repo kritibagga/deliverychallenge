@@ -7,7 +7,7 @@ import PaymentForm from "./PaymentForm";
 
 function App() {
 	const [selectedCard, setSelectedCard] = useState(cardData[0]);
-
+	
 	return (
 		<div className='container'>
 			<header className='heading'>
@@ -24,7 +24,7 @@ function App() {
 				))}
 			</div>
 			<section>
-				<PaymentForm selectedCard={selectedCard} />
+				{selectedCard && <PaymentForm selectedCard={selectedCard} />}
 			</section>
 		</div>
 	);
